@@ -1,0 +1,53 @@
+body{
+	background-image: url("restaurant_icons.png");
+}
+
+.content{
+	margin: 12% 0 0 0 ;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	font-family: Lato;
+
+
+
+}
+
+h1{
+	margin: 0 15% 1% 15%;
+	border-radius: 10%;
+
+}
+
+#getStartedButton, .nextButton{
+	border-style: solid;
+	border-color:#FFD58A;
+	border-radius: 10%;
+	border-width: 3px;
+	font-size: 30px;
+	padding: 5px 10px 5px 10px;
+	cursor: default;
+	background-color: rgba(255, 199, 42, 0.54);
+	margin: 2% 0 0 0;
+	-webkit-transition: 0.5s 0s;
+}
+
+
+
+.nextButton:hover, #getStartedButton:hover{
+	background-color:rgba(232, 0, 0, 0.72);
+}
+
+input{
+	margin-right: 10px;
+}
+
+label{
+	font-size: 1.5em;
+}
+
+.quiz-response{
+	font-size: 2em;
+	font-style: italic;
+}
+
