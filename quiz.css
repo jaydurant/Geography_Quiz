@@ -1,5 +1,6 @@
 body{
-	background-image: url("");
+	background-image: url("http://blog.hostbaby.com/wp-content/uploads/2012/05/thumbnail_lightwoodfloor.jpg");
+	background-repeat: repeat;
 }
 
 .content{
