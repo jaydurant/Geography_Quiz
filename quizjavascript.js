@@ -73,10 +73,15 @@ function startQuiz(){
 }
 
 function changeQuestion(){
-	if(next_question > 0 ){
+	if(next_question > 0){
 		var last_question = next_question - 1;
-		if(document.quiz_Form.radio_options[allQuestions[last_question].correctAnswer].checked === true){
-			score += 1;
+		if ( checkValidation() ){
+			if(document.quiz_Form.radio_options[allQuestions[last_question].correctAnswer].checked === true){
+				score += 1;
+			}
+		}
+		else{
+			return;
 		}
 	}
 
@@ -85,6 +90,9 @@ function changeQuestion(){
 		return;
 	}
 
+	if(document.getElementById("checkValidation")){
+		document.getElementById("checkValidation").parentNode.removeChild(document.getElementById("checkValidation"));
+	}
 	var current_question =  allQuestions[next_question];
 	var question_text = current_question.question;
 	document.getElementById("title").innerHTML = question_text;
@@ -98,6 +106,30 @@ function changeQuestion(){
 	}
 	next_question += 1;
 
+}
+
+function checkValidation(){
+	var radio_options = document.quiz_Form.radio_options;
+	for(var i = 0; i < radio_options.length; i++ ){
+		if (document.quiz_Form.radio_options[i].checked === true ){
+			return true;
+		}
+	}
+
+	if (document.getElementById("checkValidation")){
+		return false;
+	}
+	
+	var error_text = document.createTextNode("You can't move forward without answering a question.");
+	var error_element = document.createElement("div");
+	error_element.id = "checkValidation"
+	var content_element =  document.getElementsByClassName("content")[0]
+	var form = document.quiz_Form;
+	error_element.appendChild(error_text);
+	content_element.insertBefore(error_element,form);
+	return false;
+
+	
 }
 
 function quizCompletion(){
