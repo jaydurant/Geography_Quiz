@@ -8,9 +8,6 @@ body{
 	flex-direction:column;
 	align-items:center;
 	font-family: Lato;
-
-
-
 }
 
 h1{
@@ -49,5 +46,34 @@ label{
 .quiz-response{
 	font-size: 2em;
 	font-style: italic;
+}
+
+#checkValidation{
+	font-size: 22px;
+	font-style: italic;
+	padding:1% 1% 1% 1%;
+	border-radius: 5px;
+	animation: glow 4s ease;
+	animation-iteration-count: 2;
+	animation-fill-mode:forwards;
+	animation-direction: normal;
+	background-color: rgba(255, 181, 46, 0.28);
+	color: #754C00;
+	box-shadow: 0 0 10px 5px rgba(255, 181, 46, 0.28);
+}
+
+@keyframes glow {
+	0% 100%{
+		background-color:rgba(255, 192, 78, 0.28);
+		color: #AF700A;
+		box-shadow: 0 0 5px 5px rgba(255, 192, 78, 0.28);
+	}
+
+	50%{
+		background-color:rgba(255, 180, 45, 0.41);
+		color:#905A01;
+		box-shadow: 0 0 5px 5px rgba(255, 180, 45, 0.41);
+	}
+
 }
 

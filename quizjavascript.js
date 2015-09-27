@@ -133,6 +133,9 @@ function checkValidation(){
 }
 
 function quizCompletion(){
+	if (document.getElementById("checkValidation")){
+		document.getElementById("checkValidation").parentNode.removeChild(document.getElementById("checkValidation"));
+	}
 	document.quiz_Form.parentNode.removeChild(quiz_Form);
 	change_questButtonElement.parentNode.removeChild(change_questButtonElement);
 	var user_score = (score / allQuestions.length) * 100;
