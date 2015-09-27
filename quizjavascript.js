@@ -1,4 +1,5 @@
 var next_question=0;
+var last_question;
 var score = 0;
 var change_questButtonElement;
 var allQuestions = [
@@ -65,7 +66,7 @@ function startQuiz(){
 	change_questButtonElement =  document.createElement("div");
 
 	change_questButtonElement.appendChild(change_questButtonText);
-	document.getElementsByClassName("content")[0].appendChild(change_questButtonElement);
+	document.getElementById("buttons").appendChild(change_questButtonElement);
 
 	change_questButtonElement.className = "nextButton";
 	change_questButtonElement.onclick = changeQuestion;
@@ -74,7 +75,7 @@ function startQuiz(){
 
 function changeQuestion(){
 	if(next_question > 0){
-		var last_question = next_question - 1;
+		last_question = next_question - 1;
 		if ( checkValidation() ){
 			if(document.quiz_Form.radio_options[allQuestions[last_question].correctAnswer].checked === true){
 				score += 1;
@@ -93,6 +94,12 @@ function changeQuestion(){
 	if(document.getElementById("checkValidation")){
 		document.getElementById("checkValidation").parentNode.removeChild(document.getElementById("checkValidation"));
 	}
+
+	if(next_question === 1){
+		add_LastQButton();
+	}
+
+
 	var current_question =  allQuestions[next_question];
 	var question_text = current_question.question;
 	document.getElementById("title").innerHTML = question_text;
@@ -101,7 +108,7 @@ function changeQuestion(){
 		radio_html += "<div class='radio-buttons'><input type='radio' id='" +current_question.choices[i]  +"' name='radio_options' value='" + current_question.choices[i] + "'/>"+ "<label for='"+ current_question.choices[i]+ "'>" +current_question.choices[i] + "</label> </div>";
 	}
 	document.quiz_Form.innerHTML = radio_html;
-	if(next_question === (allQuestions.length -1)){
+	if(next_question === (allQuestions.length - 1)){
 		change_questButtonElement.innerHTML = "Finish Quiz";
 	}
 	next_question += 1;
@@ -130,6 +137,15 @@ function checkValidation(){
 	return false;
 
 	
+}
+
+function add_LastQButton(){
+	var last_question_text = document.createTextNode("Last Question");
+	var last_question_element = document.createElement("div");
+	last_question_element.appendChild(last_question_text);
+	document.getElementById("buttons").insertBefore(last_question_element,change_questButtonElement);
+	last_question_element.className = "nextButton";
+
 }
 
 function quizCompletion(){
