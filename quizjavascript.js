@@ -1,7 +1,7 @@
-var next_question=0;
-var last_question;
-var score = 0;
+var question_number=0;
+var user_answers = {};
 var change_questButtonElement;
+var last_question_element;
 var allQuestions = [
 	{
 		question: "1. What three countries are in North America?", 
@@ -57,50 +57,60 @@ var allQuestions = [
 
 ];
 
+//statQuiz function removes the initial text and begins to add the Next button
 
 function startQuiz(){
 	var started_Button = document.getElementById("getStartedButton");
 	started_Button.parentNode.removeChild(started_Button);
-	changeQuestion();
+	
 	var change_questButtonText =  document.createTextNode("Next Question");
 	change_questButtonElement =  document.createElement("div");
 
 	change_questButtonElement.appendChild(change_questButtonText);
 	document.getElementById("buttons").appendChild(change_questButtonElement);
 
+	changeQuestion();
+	
 	change_questButtonElement.className = "nextButton";
-	change_questButtonElement.onclick = changeQuestion;
+	change_questButtonElement.onclick  = function(){changeQuestion(true)};
+	document.quiz_Form.onclick = function(){detectFormChange();};
 	
 }
 
-function changeQuestion(){
-	if(next_question > 0){
-		last_question = next_question - 1;
-		if ( checkValidation() ){
-			if(document.quiz_Form.radio_options[allQuestions[last_question].correctAnswer].checked === true){
-				score += 1;
-			}
-		}
-		else{
+// changeQuestion keeps track of the current question, score ,and traverses the array to change the elements according to the question
+
+function changeQuestion(button_type){
+	if( button_type === true){
+		if(!(checkValidation())){
 			return;
+		};
+	}
+
+	if (question_number > 0 && button_type === false){
+		question_number -= 1;
+		if (question_number === 0){
+			document.getElementsByClassName("nextButton")[0].parentNode.removeChild(document.getElementsByClassName("nextButton")[0]);
 		}
 	}
 
-	if(next_question === allQuestions.length){
+	if(question_number > 0){
+		if(!(document.getElementsByClassName("nextButton")[0].innerHTML === "Last Question") ){
+			lastQButton();
+		}
+	}
+
+	if(question_number === allQuestions.length){
 		quizCompletion();
 		return;
 	}
+
+
 
 	if(document.getElementById("checkValidation")){
 		document.getElementById("checkValidation").parentNode.removeChild(document.getElementById("checkValidation"));
 	}
 
-	if(next_question === 1){
-		add_LastQButton();
-	}
-
-
-	var current_question =  allQuestions[next_question];
+	var current_question =  allQuestions[question_number];
 	var question_text = current_question.question;
 	document.getElementById("title").innerHTML = question_text;
 	var radio_html = "";
@@ -108,19 +118,28 @@ function changeQuestion(){
 		radio_html += "<div class='radio-buttons'><input type='radio' id='" +current_question.choices[i]  +"' name='radio_options' value='" + current_question.choices[i] + "'/>"+ "<label for='"+ current_question.choices[i]+ "'>" +current_question.choices[i] + "</label> </div>";
 	}
 	document.quiz_Form.innerHTML = radio_html;
-	if(next_question === (allQuestions.length - 1)){
+
+	if( !(isNaN(user_answers[question_number])) ){
+		var answer_number = user_answers[question_number];
+		document.quiz_Form.radio_options[answer_number].checked =  true;
+	}
+
+	if(question_number === (allQuestions.length - 1)){
 		change_questButtonElement.innerHTML = "Finish Quiz";
 	}
-	next_question += 1;
+
+	else if( change_questButtonElement.innerHTML === "Finish Quiz" && question_number < (allQuestions.length -1)  ){
+		change_questButtonElement.innerHTML  = "Next Question";
+	}
 
 }
 
+// checkValidation checks to see if a user has answered the question
+
 function checkValidation(){
-	var radio_options = document.quiz_Form.radio_options;
-	for(var i = 0; i < radio_options.length; i++ ){
-		if (document.quiz_Form.radio_options[i].checked === true ){
+	if ( detectFormChange() ){
+			question_number += 1;
 			return true;
-		}
 	}
 
 	if (document.getElementById("checkValidation")){
@@ -129,8 +148,8 @@ function checkValidation(){
 	
 	var error_text = document.createTextNode("You can't move forward without answering a question.");
 	var error_element = document.createElement("div");
-	error_element.id = "checkValidation"
-	var content_element =  document.getElementsByClassName("content")[0]
+	error_element.id = "checkValidation";
+	var content_element =  document.getElementsByClassName("content")[0];
 	var form = document.quiz_Form;
 	error_element.appendChild(error_text);
 	content_element.insertBefore(error_element,form);
@@ -139,21 +158,46 @@ function checkValidation(){
 	
 }
 
-function add_LastQButton(){
-	var last_question_text = document.createTextNode("Last Question");
-	var last_question_element = document.createElement("div");
-	last_question_element.appendChild(last_question_text);
-	document.getElementById("buttons").insertBefore(last_question_element,change_questButtonElement);
-	last_question_element.className = "nextButton";
+function detectFormChange(){
+	var radio_options = document.quiz_Form.radio_options;
+	for(var i = 0; i < radio_options.length; i++){
+		if(document.quiz_Form.radio_options[i].checked === true){
+			user_answers[question_number] = i;
+			return true;
+		}
+	}
+	return false;
 
 }
 
+// adds the last question button to the DOM
+
+function lastQButton(){
+		var last_question_text = document.createTextNode("Last Question");
+		last_question_element = document.createElement("div");
+		last_question_element.appendChild(last_question_text);
+		document.getElementById("buttons").insertBefore(last_question_element,change_questButtonElement);
+		last_question_element.className = "nextButton";
+		last_question_element.onclick = function(){changeQuestion(false)};
+}
+
+// displays the users score and quiz response
+
 function quizCompletion(){
+  var score = 0;
+  var quiz_response;
 	if (document.getElementById("checkValidation")){
 		document.getElementById("checkValidation").parentNode.removeChild(document.getElementById("checkValidation"));
 	}
 	document.quiz_Form.parentNode.removeChild(quiz_Form);
+	last_question_element.parentNode.removeChild(last_question_element);
 	change_questButtonElement.parentNode.removeChild(change_questButtonElement);
+	for (var i = 0 ; i < allQuestions.length; i++){
+		if(allQuestions[i].correctAnswer === user_answers[i]){
+			score += 1 ;
+		}
+	}
+
 	var user_score = (score / allQuestions.length) * 100;
 	document.getElementById("title").innerHTML = "Your Grade: " + user_score.toFixed(0) +"%";
 
@@ -162,24 +206,24 @@ function quizCompletion(){
 		case 10:
 		case 20:
 		case 30:
-			var quiz_response = document.createTextNode("You need to go back to school! ASAP!");
+			quiz_response = document.createTextNode("You need to go back to school! ASAP!");
 			break;
 		case 40:
 		case 50:
 		case 60:
-			var quiz_response = document.createTextNode("Your should probably read Wikipedia more.");
+			quiz_response = document.createTextNode("Your should probably read Wikipedia more.");
 			break;
 		case 70:
 		case 80:
-			var quiz_response =  document.createTextNode("Someone watches the Discovery channel on their spare time.");
+			quiz_response =  document.createTextNode("Someone watches the Discovery channel on their spare time.");
 			break;
 		case 90:
 		case 100:
-			var quiz_response =  document.createTextNode("You are as smart as a third grader! Congratulations!");
+			quiz_response =  document.createTextNode("You are as smart as a third grader! Congratulations!");
 			break;
-	}
+	};
 
-	var quiz_responsElement = document.createElement("div")
+	var quiz_responsElement = document.createElement("div");
 	quiz_responsElement.appendChild(quiz_response);
 	quiz_responsElement.className = "quiz-response";
 	document.getElementsByClassName("content")[0].appendChild(quiz_responsElement);

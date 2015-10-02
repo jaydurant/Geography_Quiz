@@ -16,6 +16,12 @@ h1{
 
 }
 
+#buttons{
+	display:flex;
+	flex-direction:row;
+	
+}
+
 #getStartedButton, .nextButton{
 	border-style: solid;
 	border-color:#FFD58A;
