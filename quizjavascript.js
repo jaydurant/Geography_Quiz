@@ -115,7 +115,7 @@ function changeQuestion(button_type){
 	document.getElementById("title").innerHTML = question_text;
 	var radio_html = "";
 	for (var i =0 ; i < current_question.choices.length;i++ ){
-		radio_html += "<div class='radio-buttons'><input type='radio' id='" +current_question.choices[i]  +"' name='radio_options' value='" + current_question.choices[i] + "'/>"+ "<label for='"+ current_question.choices[i]+ "'>" +current_question.choices[i] + "</label> </div>";
+		radio_html += "<div class='radio-buttons'><label><input type='radio' id='" +current_question.choices[i]  +"' name='radio_options' value='" + current_question.choices[i] + "'/>" + current_question.choices[i] + "</label> </div>";
 	}
 	document.quiz_Form.innerHTML = radio_html;
 

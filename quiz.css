@@ -22,13 +22,17 @@ h1{
 	
 }
 
+#buttons :first-child {
+	margin-right: 0.5em;
+}
+
 #getStartedButton, .nextButton{
 	border-style: solid;
 	border-color:#FFD58A;
 	border-radius: 10%;
 	border-width: 3px;
 	font-size: 30px;
-	padding: 5px 10px 5px 10px;
+	padding: 5px 5px;
 	cursor: default;
 	background-color: rgba(255, 199, 42, 0.54);
 	margin: 2% 0 0 0;
@@ -39,6 +43,7 @@ h1{
 
 .nextButton:hover, #getStartedButton:hover{
 	background-color:rgba(232, 0, 0, 0.72);
+	border-color: rgba(232, 0, 0, 0.72);
 }
 
 input{
