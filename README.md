@@ -12,4 +12,4 @@ Removing html in javascript through use of handlebars
 
 Using JSON to store questions and answers
 
-creating a login page for users to create an accoutn through local storage
+creating a login page for users to create an account through local storage
