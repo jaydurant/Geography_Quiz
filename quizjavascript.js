@@ -57,7 +57,9 @@ var allQuestions = [
 
 ];
 
-//statQuiz function removes the initial text and begins to add the Next button
+document.getElementById("getStartedButton").onclick = function(){startQuiz();};
+
+//startQuiz function removes the initial text and begins to add the Next button
 
 function startQuiz(){
 	var started_Button = document.getElementById("getStartedButton");
