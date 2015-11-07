@@ -26,6 +26,55 @@ h1{
 	margin-right: 0.5em;
 }
 
+#createAccount{
+	border-style: solid;
+	border-color: rgba(255, 61, 31, 0.52);
+	background-color: rgba(255, 61, 31, 0.60);
+	padding: 10px;
+	display:inline-block;
+	border-radius: 10%;
+	cursor: default;
+
+}
+
+
+#accessFields{
+	display:flex;
+	flex-direction: column ;
+	width:250px;
+}
+
+.accountAccessFields{
+	text-align: center;
+	font-size: 25px;
+	color:black;
+}
+
+#login{
+	border-style: solid;
+	border-color: rgba(0, 102, 255, 0.52);
+	background-color: #4d90fe;;
+	margin-left: 8px;
+	padding: 10px 20px;
+	display: inline-block;
+	border-radius: 10%;
+	cursor: default;
+
+}
+
+#login:hover{
+	border-color: rgba(57, 212, 47, 0.82);
+	background-color: rgba(57, 212, 47, 0.62);
+	font-size: 20px;
+	-webkit-transition: 0.5s 0s;
+}
+
+#createAccount:hover{
+	border-color: rgba(255, 41, 159, 0.8);
+	background-color: rgba(255, 41, 159, 0.6);
+	font-size: 20px;
+	-webkit-transition: 0.5s 0s;
+}
 #getStartedButton, .nextButton{
 	border-style: solid;
 	border-color:#FFD58A;
@@ -35,7 +84,7 @@ h1{
 	padding: 5px 5px;
 	cursor: default;
 	background-color: rgba(255, 199, 42, 0.54);
-	margin: 2% 0 0 0;
+	margin: 10% 0 0 0;
 	-webkit-transition: 0.5s 0s;
 }
 
@@ -44,6 +93,7 @@ h1{
 .nextButton:hover, #getStartedButton:hover{
 	background-color:rgba(232, 0, 0, 0.72);
 	border-color: rgba(232, 0, 0, 0.72);
+	font-size: 35px;
 }
 
 input{
