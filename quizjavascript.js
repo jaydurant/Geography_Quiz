@@ -61,7 +61,7 @@ window.onload =  function(){
 
 	var cookieName = getCookieValue("u_name");
 	if(cookieName){
-		document.querySelector("h2").innerHTML = "Hi " + cookieName[0].toUpperCase() + cookieName.substring(1) + ", please sign in";
+		document.querySelector("h2").innerHTML = "Hi " + cookieName[0].toUpperCase() + cookieName.substring(1) + ", please login";
 	}
 
 };
