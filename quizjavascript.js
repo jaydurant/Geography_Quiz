@@ -55,7 +55,16 @@ var allQuestions = [
 
 ];
 
-document.getElementById("accountAccess").onclick = accountAccess;
+window.onload =  function(){
+
+	document.getElementById("accountAccess").onclick = accountAccess;
+
+	var cookieName = getCookieValue("u_name");
+	if(cookieName){
+		document.querySelector("h2").innerHTML = "Hi " + cookieName[0].toUpperCase() + cookieName.substring(1) + ", please sign in";
+	}
+
+};
 
 // accountAccess shows the input fields to create an account or login
 
@@ -234,16 +243,18 @@ function accessValidation(){
 	if(document.quiz_Form.length === 4 && document.quiz_Form.password.value === document.quiz_Form.passwordverify.value && storageAvailable("localStorage")){
 			localStorage.clear();
 			var user = {};
-			user["uname"] = document.quiz_Form.username.value;
+			user["username"] = document.quiz_Form.username.value;
 			user["password"] = document.quiz_Form.passwordverify.value;
 			user["scores"] = [];
 			localStorage["user"] = JSON.stringify(user);
+
+			setCookie("u_name",document.quiz_Form.u_name.value,"","/")
 		
 	}
 
 	else if(document.quiz_Form.length === 2 && storageAvailable("localStorage")){
 		var userLocalStorage = JSON.parse(localStorage.user)
-		if (document.quiz_Form.username.value !== userLocalStorage.uname || document.quiz_Form.password.value !== userLocalStorage.password ){
+		if (document.quiz_Form.username.value !== userLocalStorage.username || document.quiz_Form.password.value !== userLocalStorage.password ){
 			return false;
 		}
 	}
@@ -428,5 +439,51 @@ function storageAvailable(storageType){
 	catch (e){
 		return false;
 	}
+
+}
+
+// setCookie sets the cookie
+
+function setCookie(cookieName,cookieValue,cookieExpires,cookiePath){
+	cookieValue = encodeURIComponent(cookieValue);
+	if( cookieExpires ==="" ){
+		var nowDate = new Date();
+		nowDate.setMonth(nowDate.getMonth() + 6);
+		cookieExpires = nowDate.toGMTString();
+	}
+
+	if (cookiePath !== ""){
+		cookiePath = ";Path=" + cookiePath;
+	}
+
+	document.cookie = cookieName + "=" + cookieValue + ";expires=" + cookieExpires + cookiePath;
+}
+
+// getCookieValue returns the value of a name - value pair
+
+function getCookieValue(cookieName){
+	var cookieValue =  document.cookie;
+	var cookieStartsAt = cookieValue.indexOf(" " + cookieName + "=");
+
+	if (cookieStartsAt === -1){
+		cookieStartsAt =  cookieValue.indexOf(cookieName + "=");
+	}
+
+	if (cookieStartsAt === -1){
+		return null;
+	}
+
+	else{
+		var cookieValueStart = cookieValue.indexOf("=",cookieStartsAt) + 1;
+		var cookieValueEnd = cookieValue.indexOf(";",cookieStartsAt);
+		if (cookieValueEnd === -1){
+			cookieValueEnd = cookieValue.length;
+		}
+
+		cookieValue = decodeURIComponent(cookieValue.substring(cookieValueStart,cookieValueEnd));
+
+	}
+
+	return cookieValue;
 
 }
