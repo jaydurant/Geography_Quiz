@@ -144,7 +144,7 @@ function showAccountPage(){
 		return
 	}
 	var userdata = JSON.parse(localStorage.user)
-	document.querySelector("h1").innerHTML = "Hi " + userdata.uname  + ", welcome to your account page.";
+	document.querySelector("h1").innerHTML = "Hi " + userdata.username  + ", welcome to your account page.";
 	document.querySelector("h2").innerHTML = "View your scores below";
 	document.querySelector("h2").style.display="block"
 
