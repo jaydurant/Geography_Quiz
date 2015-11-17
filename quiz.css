@@ -3,113 +3,140 @@ body{
 }
 
 .content{
-	margin: 12% 0 0 0 ;
+	margin: 12% 15% 0 15% ;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	font-family: Lato;
 }
 
-h1{
-	margin: 0 15% 1% 15%;
 
-}
-
-#buttons{
+#actionButtons{
 	display:flex;
 	flex-direction:row;
+	margin: .5em 0 0 0;
 	
 }
 
-#buttons :first-child {
+#actionButtons :first-child {
 	margin-right: 0.5em;
 }
 
-#createAccount{
-	border-style: solid;
-	border-color: rgba(255, 61, 31, 0.52);
-	background-color: rgba(255, 61, 31, 0.60);
+#accessFields{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	margin-bottom: 5px;
+}
+
+.accountAccessInputs{
+	text-align: center;
+	font-size: 25px;
+	margin: 5px 0;
+	padding: 5px;
+	border: solid 1px #fff;
+	box-shadow: inset 0px 2px 2px 1px #707070;
+	margin-top: 3px;
+	border-radius: 10px;
+	outline:none;
+	width:250px;
+	transition: box-shadow 0.3s;
+
+}
+
+.accountAccessInputs:focus{
+	box-shadow: inset 0px 2px 2px 1px #c9c9c9;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:rgb(119,119,119);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:rgb(119,119,119);
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:rgb(119,119,119);
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:rgb(119,119,119);
+}
+
+.normalButton{
+	border-radius: 10%;
+	font-size: 30px;
 	padding: 10px;
+	cursor: default;
+	background-color: rgba(255, 199, 42, 0.70);
+	-webkit-transition: 0.5s 0s;
+}
+
+#accessScoresButton, #nextQButton{
+	background-color:rgba(255, 111, 42, 0.7);
+}
+
+.normalButton:hover, #accessScoresButton:hover, #nextQButton:hover{
+	background-color:rgba(232, 0, 0, 0.72);
+	font-size: 35px;
+}
+
+
+#accountAccess{
+	display: flex;
+	justify-content:space-between;
+	margin-bottom: 10px;
+
+}
+
+#createAccountButton{
+	background-color: rgba(255, 61, 31, 0.60);
+	padding: 13px 20px;
 	display:inline-block;
 	border-radius: 10%;
 	cursor: default;
-
 }
 
-
-#accessFields{
-	display:flex;
-	flex-direction: column ;
-	width:250px;
-}
-
-.accountAccessFields{
-	text-align: center;
-	font-size: 25px;
-	color:black;
-}
-
-#login{
-	border-style: solid;
-	border-color: rgba(0, 102, 255, 0.52);
-	background-color: #4d90fe;;
+#loginButton{
+	background-color: rgba(73, 146, 255, 0.80);
 	margin-left: 8px;
-	padding: 10px 20px;
+	padding: 13px 25px;
 	display: inline-block;
 	border-radius: 10%;
 	cursor: default;
 
 }
 
-#login:hover{
-	border-color: rgba(57, 212, 47, 0.82);
-	background-color: rgba(57, 212, 47, 0.62);
+#loginButton:hover{
+	background-color: rgba(0, 102, 255, 0.80);
 	font-size: 20px;
 	-webkit-transition: 0.5s 0s;
 }
 
-#createAccount:hover{
-	border-color: rgba(255, 41, 159, 0.8);
-	background-color: rgba(255, 41, 159, 0.6);
+#createAccountButton:hover{
+	background-color: rgba(255, 32, 32, 0.78);
 	font-size: 20px;
 	-webkit-transition: 0.5s 0s;
 }
-#getStartedButton, .nextButton{
-	border-style: solid;
-	border-color:#FFD58A;
-	border-radius: 10%;
-	border-width: 3px;
-	font-size: 30px;
-	padding: 5px 5px;
-	cursor: default;
-	background-color: rgba(255, 199, 42, 0.54);
-	margin: 10% 0 0 0;
-	-webkit-transition: 0.5s 0s;
-}
 
-
-
-.nextButton:hover, #getStartedButton:hover{
-	background-color:rgba(232, 0, 0, 0.72);
-	border-color: rgba(232, 0, 0, 0.72);
-	font-size: 35px;
-}
-
-input{
-	margin-right: 10px;
-}
 
 label{
 	font-size: 1.5em;
 }
 
-.quiz-response{
+input[type="radio"]{
+	vertical-align: middle;
+}
+
+.quizResponse{
 	font-size: 2em;
 	font-style: italic;
 }
 
-#checkValidation{
-	font-size: 22px;
+.errorElement{
+	font-size: 18px;
+	width:250px;
+	text-align: center;
 	font-style: italic;
 	padding:1% 1% 1% 1%;
 	border-radius: 5px;
@@ -120,6 +147,10 @@ label{
 	background-color: rgba(255, 181, 46, 0.28);
 	color: #754C00;
 	box-shadow: 0 0 10px 5px rgba(255, 181, 46, 0.28);
+}
+
+.errorElementWidth{
+	width:50%;
 }
 
 @keyframes glow {
@@ -135,5 +166,57 @@ label{
 		box-shadow: 0 0 5px 5px rgba(255, 180, 45, 0.41);
 	}
 
+}
+
+#scoreTable{
+	width:40%;
+}
+
+
+table{
+	width:100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0);
+    color:#024457;
+    border-collapse: collapse;
+
+}
+
+th{
+	padding: 1em;
+	background-color: #167F92;
+	color:#FFF;
+	font-weight: bold;
+}
+
+
+th:last-child{
+	border-left: 1px solid #FFF;
+}
+
+th,td {
+	text-align: center;
+	margin: .5em 1em;
+}
+
+table tr:nth-child(even){
+	background-color: #FFF;
+}
+
+table tr:nth-child(odd){
+	background-color: #EAF3F3;
+}
+
+tr:first-child th:first-child{ 
+	border-top-left-radius: 10px; 
+}
+tr:first-child th:last-child{ 
+	border-top-right-radius: 10px;
+}
+tr:last-child td:first-child{ 
+	border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child{ 
+	border-bottom-right-radius: 10px; 
 }
 
