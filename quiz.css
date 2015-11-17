@@ -1,27 +1,61 @@
+/* body contains the background image */
 body{
 	background-image: url("restaurant_icons.png");
 }
 
+/* .content will contain the bounds for child elements, set the fonts, and center/align the child elements */
 .content{
 	margin: 12% 15% 0 15% ;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	font-family: Lato;
+
 }
 
-
-#actionButtons{
-	display:flex;
-	flex-direction:row;
-	margin: .5em 0 0 0;
-	
+h2{
+	margin-top: 0;
 }
 
-#actionButtons :first-child {
-	margin-right: 0.5em;
+/* from accountAccess to createAccountButton:hover these selectors determine the styles for the intials buttons and their placements*/
+#accountAccess{
+	display: flex;
+	justify-content:space-between;
+	margin-bottom: 10px;
+
 }
 
+#createAccountButton{
+	background-color: rgba(255, 61, 31, 0.60);
+	padding: 13px 20px;
+	display:inline-block;
+	border-radius: 10%;
+	cursor: default;
+}
+
+#loginButton{
+	background-color: rgba(73, 146, 255, 0.80);
+	margin-left: 8px;
+	padding: 13px 25px;
+	display: inline-block;
+	border-radius: 10%;
+	cursor: default;
+
+}
+
+#loginButton:hover{
+	background-color: rgba(0, 102, 255, 0.80);
+	font-size: 20px;
+	-webkit-transition: 0.5s 0s;
+}
+
+#createAccountButton:hover{
+	background-color: rgba(255, 32, 32, 0.78);
+	font-size: 20px;
+	-webkit-transition: 0.5s 0s;
+}
+
+/* from accessFields to accountAcessInputs:focus these selectors work to style the input fields of the initial login and account creation form */
 #accessFields{
 	display:flex;
 	flex-direction:column;
@@ -63,6 +97,7 @@ body{
    color:rgb(119,119,119);
 }
 
+/* from normalButton to the hover psuedo elements these selectors target the buttons which allow the user to traverse through the quiz and access their scores */
 .normalButton{
 	border-radius: 10%;
 	font-size: 30px;
@@ -70,6 +105,17 @@ body{
 	cursor: default;
 	background-color: rgba(255, 199, 42, 0.70);
 	-webkit-transition: 0.5s 0s;
+}
+
+#actionButtons{
+	display:flex;
+	flex-direction:row;
+	margin: .5em 0 0 0;
+	
+}
+
+#actionButtons :first-child {
+	margin-right: 0.5em;
 }
 
 #accessScoresButton, #nextQButton{
@@ -81,45 +127,7 @@ body{
 	font-size: 35px;
 }
 
-
-#accountAccess{
-	display: flex;
-	justify-content:space-between;
-	margin-bottom: 10px;
-
-}
-
-#createAccountButton{
-	background-color: rgba(255, 61, 31, 0.60);
-	padding: 13px 20px;
-	display:inline-block;
-	border-radius: 10%;
-	cursor: default;
-}
-
-#loginButton{
-	background-color: rgba(73, 146, 255, 0.80);
-	margin-left: 8px;
-	padding: 13px 25px;
-	display: inline-block;
-	border-radius: 10%;
-	cursor: default;
-
-}
-
-#loginButton:hover{
-	background-color: rgba(0, 102, 255, 0.80);
-	font-size: 20px;
-	-webkit-transition: 0.5s 0s;
-}
-
-#createAccountButton:hover{
-	background-color: rgba(255, 32, 32, 0.78);
-	font-size: 20px;
-	-webkit-transition: 0.5s 0s;
-}
-
-
+/* label and input seletors are assigning the styles for the quiz questions */
 label{
 	font-size: 1.5em;
 }
@@ -128,11 +136,7 @@ input[type="radio"]{
 	vertical-align: middle;
 }
 
-.quizResponse{
-	font-size: 2em;
-	font-style: italic;
-}
-
+/* errorElement and errorElementWidth assign the styles for all error elements from inital login/account creation to interacting wth the quiz */
 .errorElement{
 	font-size: 18px;
 	width:250px;
@@ -168,6 +172,7 @@ input[type="radio"]{
 
 }
 
+/* scoreTable and the subsequent table elements style the table with the score associated to the user */
 #scoreTable{
 	width:40%;
 }
